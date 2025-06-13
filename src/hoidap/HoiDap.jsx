@@ -13,7 +13,7 @@ const data = [
 		],
 	},
 	{
-		title: "2. Ai là người không nên hiến máu?",
+		title: "2. Ai là người không nên hiến máu trong benh vien?",
 		content: [
 			"- Người đã nhiễm hoặc đã thực hiện hành vi có nguy cơ nhiễm HIV, viêm gan B, viêm gan C, và các vius lây qua đường truyền máu.",
 			"- Người có các bệnh mãn tính: tim mạch, huyết áp, hô hấp, dạ dày…",
