@@ -9,6 +9,15 @@ const userSchema = new mongoose.Schema({
     trim: true,
     minlength: 3
   },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
+  fullName: {
+    type: String,
+    required: true
+  },
   email: {
     type: String,
     required: true,
@@ -16,10 +25,19 @@ const userSchema = new mongoose.Schema({
     trim: true,
     lowercase: true
   },
-  password: {
+  phone: {
+    type: String,
+    required: true
+  },
+  bloodType: {
     type: String,
     required: true,
-    minlength: 6
+    enum: ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
+  },
+  role: {
+    type: String,
+    enum: ['donor', 'admin'],
+    default: 'donor'
   },
   createdAt: {
     type: Date,
