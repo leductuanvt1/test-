@@ -7,7 +7,7 @@ const data = [
 		content: [
 			"- Tất cả mọi người từ 18 - 60 tuổi, thực sự tình nguyện hiến máu của mình để cứu chữa người bệnh.",
 			"- Cân nặng ít nhất là 45kg đối với phụ nữ, nam giới. Lượng máu hiến mỗi lần không quá 9ml/kg cân nặng và không quá 500ml mỗi lần.",
-			"- Không bị nhiễm hoặc không có các hành vi lây nhiễm HIV và các bệnh lây nhiễm qua đường truyền máu khác.",
+			"- Không bị nhiễm hoặc không có các hành vi lây nhiễm HIV và các bệnh lây nhiễm qua đường truyền nhiem khac",
 			"- Thời gian giữa 2 lần hiến máu là 12 tuần đối với cả Nam và Nữ.",
 			"- Có giấy tờ tùy người .",
 		],
