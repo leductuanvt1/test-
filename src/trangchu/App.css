@@ -1,0 +1,320 @@
+/* Định dạng vùng gốc, cho phép full màn hình */
+#root {
+  /* max-width: 1280px; */ /* Xóa hoặc comment dòng này để full width */
+  width: 100vw;            /* Chiếm toàn bộ chiều ngang màn hình */
+  min-height: 100vh;       /* Đảm bảo chiều cao tối thiểu là 100% màn hình */
+  margin: 0;               /* Xóa căn giữa */
+  padding: 0;              /* Xóa padding để full */
+  text-align: center;
+  box-sizing: border-box;  /* Đảm bảo padding không làm tràn */
+  background: #fff;        /* Nền trắng */
+}
+
+/* Định dạng logo */
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+/* Animation quay logo */
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Chỉ quay logo khi không bật chế độ giảm chuyển động */
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Định dạng thẻ card */
+.card {
+  padding: 2em;
+}
+
+/* Định dạng text hướng dẫn */
+.read-the-docs {
+  color: #888;
+}
+
+/* Dòng chứa logo */
+.logo-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Thanh header trên cùng */
+.header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 0 0;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 0;
+  background: #fff;
+}
+
+/* Header trái và phải */
+.header-left, .header-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1.1rem;
+  color: #888;
+}
+
+/* Header phải căn phải */
+.header-right {
+  justify-content: flex-end;
+}
+
+/* Header giữa căn giữa */
+.header-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo trung tâm */
+.logo-center {
+  max-width: 48px;
+  height: auto;
+  margin-right: 8px;
+}
+
+/* Logo chữ */
+.logo-chu {
+  max-width: 120px;
+  height: auto;
+}
+
+/* Ngôn ngữ đang chọn */
+.lang-active {
+  font-weight: bold;
+  color: #222;
+}
+
+/* Gạch ngăn cách ngôn ngữ */
+.lang-divider {
+  margin: 0 4px;
+  color: #bbb;
+}
+
+/* Ngôn ngữ không chọn */
+.lang-inactive {
+  color: #bbb;
+}
+
+/* Icon đăng nhập */
+.login-icon {
+  font-size: 1.3em;
+  margin-right: 4px;
+  color: #888;
+}
+
+/* Text đăng nhập */
+.login-text {
+  color: #888;
+}
+
+/* Thanh menu chính màu xanh */
+.main-menu {
+  background: #1565c0; /* Xanh dương đậm hơn */
+  padding: 0 0 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  height: 48px;
+  align-items: center;
+}
+
+/* Link trong menu */
+.main-menu a {
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: 
+    color 0.2s,
+    background 0.2s,
+    transform 0.12s;
+  padding: 8px 18px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+/* Hover menu */
+.main-menu a:hover {
+  color: #ffeb3b;
+  background: rgba(255,255,255,0.08);
+  transform: scale(1.08);
+}
+
+/* Active (khi bấm giữ chuột) */
+.main-menu a:active {
+  color: #fff;
+  background: #1976d2;
+  transform: scale(0.97);
+}
+
+.main-menu .menu-link {
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  display: inline-block;
+  transition: color 0.2s, background 0.2s, transform 0.12s;
+}
+
+.main-menu .menu-link.active {
+  color: #ffeb3b;
+  background: rgba(255,255,255,0.08);
+}
+
+.main-menu .menu-link.active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 4px;
+  height: 3px;
+  border-radius: 2px;
+  background: #ffeb3b;
+  transition: width 0.2s;
+}
+
+.image-section {
+  width: 100%;         /* Sửa từ 100vw thành 100% */
+  max-width: 100vw;
+  overflow: hidden;
+  position: relative;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  left: 0;
+  right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.image-section img {
+  width: 100%;         /* Sửa từ 100vw thành 100% */
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Quyền lợi */
+.quyenloi-container {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+  margin: 40px 0;
+  max-width: 860px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  flex-wrap: wrap;
+}
+
+.quyenloi-img {
+  width: 50%;
+  min-width: 180px;
+  max-width: 420px;
+  object-fit: cover;
+  display: block;
+  height: auto;
+  box-shadow: 0 2px 12px #dde6f2;
+}
+
+.quyenloi-img-left {
+  border-radius: 12px 0 0 12px;
+}
+
+.quyenloi-img-right {
+  border-radius: 0 12px 12px 0;
+  margin-left: -16px;
+}
+
+
+
+@keyframes datlich-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255,82,82, 0.7);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(255,82,82, 0);
+    transform: scale(1.06);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255,82,82, 0);
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 900px) {
+  .image-section {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: -50vw;
+    left: 50%;
+    right: 50%;
+  }
+  .image-section img {
+    width: 100vw;
+    max-width: 100vw;
+  }
+  .quyenloi-container {
+    flex-direction: column;
+    align-items: center;
+    max-width: 98vw;
+  }
+  .quyenloi-img {
+    width: 95vw;
+    max-width: 98vw;
+    margin-left: 0 !important;
+    border-radius: 12px !important;
+    margin-bottom: 16px;
+  }
+}
+
+/* Nút nhấp nháy */
+.blink-button {
+  background: #e53935 !important;
+  animation: datlich-pulse 1.2s infinite;
+  color: #fff !important;
+  font-weight: 900;
+  font-size: 1.5rem;
+  padding: 12px 32px;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 2px 12px rgba(229,57,53,0.10);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  outline: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 150px; /* Thêm dòng này để nút thấp xuống 20px */
+}
