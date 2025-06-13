@@ -121,7 +121,7 @@ const data = [
 			"- Một số quy định liên quan đến nghề nghiệp và hoạt động đặc thù của người hiến máu: những người làm một số công việc và thực hiện các hoạt động đặc thù sau đây chỉ hiến máu trong ngày nghỉ hoặc chỉ được thực hiện các công việc, hoạt động này sau khi hiến máu tối thiểu 12 giờ:",
 			"+ Người làm việc trên cao hoặc dưới độ sâu: phi công, lái cần cẩu, công nhân làm việc trên cao, người leo núi, thợ mỏ, thủy thủ, thợ lặn.",
 			"+ Người vận hành các phương tiện giao thông công cộng: lái xe buýt, lái tàu hoả, lái tàu thuỷ.",
-			"+ Các trường hợp khác: vận động viên chuyên nghiệp, người vận động nặng, tập luyện nặng.",
+			"+ Các trường hợp khác: vận động viên chuyên nghiệp, người vận động nặng, tập luyện nặng và gym.",
 		],
 	},
 	{

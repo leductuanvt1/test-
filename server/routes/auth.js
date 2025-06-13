@@ -1,11 +1,18 @@
 const router = require('express').Router();
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const config = require('../config/config');
+const auth = require('../middleware/auth');
 
 // Register
 router.post('/register', async (req, res) => {
   try {
     const { username, email, password } = req.body;
+
+    // Validate input
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
 
     // Check if user already exists
     const existingUser = await User.findOne({ $or: [{ email }, { username }] });
@@ -25,8 +32,8 @@ router.post('/register', async (req, res) => {
     // Create token
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '24h' }
+      config.jwtSecret,
+      { expiresIn: config.jwtExpiration }
     );
 
     res.status(201).json({
@@ -47,6 +54,11 @@ router.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({ message: 'All fields are required' });
+    }
+
     // Find user
     const user = await User.findOne({ email });
     if (!user) {
@@ -62,8 +74,8 @@ router.post('/login', async (req, res) => {
     // Create token
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '24h' }
+      config.jwtSecret,
+      { expiresIn: config.jwtExpiration }
     );
 
     res.json({
@@ -74,6 +86,19 @@ router.post('/login', async (req, res) => {
         email: user.email
       }
     });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+// Get current user
+router.get('/me', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password');
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.json(user);
   } catch (error) {
     res.status(500).json({ message: 'Server error', error: error.message });
   }
