@@ -4,6 +4,7 @@ import loginBg from '../../img/login.png';
 import LienHe from '../trangchu/LienHe';
 import Select from "react-select";
 import makeAnimated from 'react-select/animated';
+import axios from 'axios';
 
 const animatedComponents = makeAnimated();
 
@@ -15,7 +16,12 @@ const Register = () => {
     city: '',
     district: '',
     ward: '',
-    address: ''
+    address: '',
+    username: '',
+    password: '',
+    email: '',
+    phone: '',
+    bloodType: ''
   });
   const [error, setError] = useState('');
   const [provinceOptions, setProvinceOptions] = useState([]);
@@ -76,58 +82,45 @@ const Register = () => {
     setForm({ ...form, [name]: value });
   };
 
-  // Lấy danh sách tài khoản từ localStorage
-  const getAccounts = () => {
-    const local = localStorage.getItem('accounts');
-    if (local) return JSON.parse(local);
-    return [];
-  };
-
-  // Lưu danh sách tài khoản vào localStorage
-  const saveAccounts = (accounts) => {
-    localStorage.setItem('accounts', JSON.stringify(accounts));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    if (
-      !form.name.trim() ||
-      !form.dob ||
-      !form.gender ||
-      !form.city ||
-      !form.district ||
-      !form.ward ||
-      !form.address.trim()
-    ) {
-      setError('Vui lòng nhập đầy đủ thông tin!');
-      return;
+
+    try {
+      // Validate form
+      if (!form.name || !form.dob || !form.gender || !form.city || !form.district || 
+          !form.ward || !form.address || !form.username || !form.password || 
+          !form.email || !form.phone || !form.bloodType) {
+        setError('Vui lòng nhập đầy đủ thông tin!');
+        return;
+      }
+
+      // Check age
+      const today = new Date();
+      const dob = new Date(form.dob);
+      const age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      const isBirthdayPassed = m > 0 || (m === 0 && today.getDate() >= dob.getDate());
+      const realAge = isBirthdayPassed ? age : age - 1;
+
+      if (realAge < 18 || realAge > 60) {
+        setError('Độ tuổi phải từ 18 đến 60!');
+        return;
+      }
+
+      // Register user
+      const response = await axios.post('http://localhost:4000/api/auth/register', form);
+      
+      // Save token and user info
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      // Show success message and redirect
+      setError('Đăng ký thành công! Vui lòng nhập thông tin bổ sung.');
+      setTimeout(() => navigate('/information'), 1000);
+    } catch (error) {
+      setError(error.response?.data?.message || 'Đăng ký thất bại. Vui lòng thử lại.');
     }
-    // Kiểm tra độ tuổi từ 18 đến 60
-    const today = new Date();
-    const dob = new Date(form.dob);
-    const age = today.getFullYear() - dob.getFullYear();
-    const m = today.getMonth() - dob.getMonth();
-    const isBirthdayPassed = m > 0 || (m === 0 && today.getDate() >= dob.getDate());
-    const realAge = isBirthdayPassed ? age : age - 1;
-    if (realAge < 18 || realAge > 60) {
-      setError('Độ tuổi phải từ 18 đến 60!');
-      return;
-    }
-    const accounts = getAccounts();
-    accounts.push(form);
-    saveAccounts(accounts);
-    setForm({
-      name: '',
-      dob: '',
-      gender: '',
-      city: '',
-      district: '',
-      ward: '',
-      address: ''
-    });
-    setError('Đăng ký thành công! Vui lòng nhập thông tin bổ sung.');
-    setTimeout(() => navigate('/information'), 1000);
   };
 
   return (
@@ -364,6 +357,126 @@ const Register = () => {
               }}
             />
 
+            {/* Thông tin đăng nhập */}
+            <label style={{ fontWeight: 600, marginBottom: 6, display: 'block', textAlign: 'left' }}>
+              Thông tin đăng nhập <span style={{ color: 'red' }}>*</span>
+            </label>
+            <div style={{ background: '#2563eb', color: '#fff', borderRadius: 6, padding: '8px 12px', marginBottom: 4, fontSize: 15, textAlign: 'left' }}>
+              Nhập thông tin để tạo tài khoản
+            </div>
+            <input
+              type="text"
+              placeholder="Tên đăng nhập"
+              value={form.username}
+              onChange={handleChange}
+              name="username"
+              required
+              style={{
+                width: '100%',
+                padding: 14,
+                border: '1px solid #bfc9e0',
+                borderRadius: 8,
+                background: '#f7f9fc',
+                fontSize: 16,
+                marginBottom: 16,
+                boxSizing: 'border-box'
+              }}
+            />
+            <input
+              type="password"
+              placeholder="Mật khẩu"
+              value={form.password}
+              onChange={handleChange}
+              name="password"
+              required
+              style={{
+                width: '100%',
+                padding: 14,
+                border: '1px solid #bfc9e0',
+                borderRadius: 8,
+                background: '#f7f9fc',
+                fontSize: 16,
+                marginBottom: 16,
+                boxSizing: 'border-box'
+              }}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              value={form.email}
+              onChange={handleChange}
+              name="email"
+              required
+              style={{
+                width: '100%',
+                padding: 14,
+                border: '1px solid #bfc9e0',
+                borderRadius: 8,
+                background: '#f7f9fc',
+                fontSize: 16,
+                marginBottom: 16,
+                boxSizing: 'border-box'
+              }}
+            />
+            <input
+              type="tel"
+              placeholder="Số điện thoại"
+              value={form.phone}
+              onChange={handleChange}
+              name="phone"
+              required
+              style={{
+                width: '100%',
+                padding: 14,
+                border: '1px solid #bfc9e0',
+                borderRadius: 8,
+                background: '#f7f9fc',
+                fontSize: 16,
+                marginBottom: 16,
+                boxSizing: 'border-box'
+              }}
+            />
+
+            {/* Nhóm máu */}
+            <label style={{ fontWeight: 600, marginBottom: 6, display: 'block', textAlign: 'left' }}>
+              Nhóm máu <span style={{ color: 'red' }}>*</span>
+            </label>
+            <div style={{ background: '#2563eb', color: '#fff', borderRadius: 6, padding: '8px 12px', marginBottom: 4, fontSize: 15, textAlign: 'left' }}>
+              Chọn nhóm máu của bạn
+            </div>
+            <select
+              value={form.bloodType}
+              onChange={handleChange}
+              name="bloodType"
+              required
+              style={{
+                width: '100%',
+                padding: 14,
+                border: '1px solid #bfc9e0',
+                borderRadius: 8,
+                background: '#f7f9fc',
+                fontSize: 16,
+                marginBottom: 16,
+                boxSizing: 'border-box'
+              }}
+            >
+              <option value="">Chọn nhóm máu</option>
+              <option value="A+">A+</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B-">B-</option>
+              <option value="AB+">AB+</option>
+              <option value="AB-">AB-</option>
+              <option value="O+">O+</option>
+              <option value="O-">O-</option>
+            </select>
+
+            {error && (
+              <div style={{ color: error.includes('thành công') ? 'green' : 'red', margin: '16px 0', textAlign: 'center', fontWeight: 500 }}>
+                {error}
+              </div>
+            )}
+
             <button
               type="submit"
               style={{
@@ -379,7 +492,7 @@ const Register = () => {
                 boxShadow: '0 2px 8px #bfc9e0'
               }}
             >
-              Đăng ký 
+              Đăng ký
             </button>
             <div style={{ textAlign: 'center', marginTop: 18 }}>
               Đã có tài khoản?{' '}

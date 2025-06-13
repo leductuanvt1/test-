@@ -125,9 +125,9 @@ const data = [
 		],
 	},
 	{
-		title: "13. Tôi có thể hiến máu sau khi tiêm vắc xin Covid-19 không?",
+		title: "13. Tôi có thể hiến máu sau khi tiêm vắc xin Covid-19 không ?",
 		content: [
-			"- Khi tiêm vắc xin ngừa Covid-19, có thể tham gia hiến máu sau: 7 NGÀY, để đảm bảo bạn không bị tác dụng phụ và đảm bảo đủ sức khỏe vào ngày hiến máu.",
+			"- Khi tiêm vắc xin ngừa Covid-19, cac ban có thể tham gia hiến máu sau: 7 NGÀY, để đảm bảo bạn không bị tác dụng phụ và đảm bảo đủ sức khỏe vào ngày hiến máu.",
 		],
 	},
 	{

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginBg from "../../img/login.png";
 import LienHe from "../trangchu/LienHe";
-
+import axios from 'axios';
 
 const Login = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
@@ -10,12 +10,30 @@ const Login = ({ onLoginSuccess }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    // Giả lập đăng nhập thành công
-    onLoginSuccess({ name: username });
-    navigate('/'); // Chuyển hướng về trang chủ khi đăng nhập thành công
+
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/login', {
+        username,
+        password
+      });
+
+      const { token, user } = response.data;
+      
+      // Lưu token vào localStorage
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+
+      // Gọi callback đăng nhập thành công
+      onLoginSuccess(user);
+      
+      // Chuyển hướng về trang chủ
+      navigate('/');
+    } catch (error) {
+      setError(error.response?.data?.message || 'Đăng nhập thất bại. Vui lòng thử lại.');
+    }
   };
 
   return (
