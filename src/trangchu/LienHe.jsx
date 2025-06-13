@@ -55,7 +55,7 @@ const LienHe = () => {
             }}>
               {/* TT Hiến Máu Nhân Đạo */}
               <div style={{ minWidth: 200, maxWidth: 260, textAlign: "left" }}>
-                <div style={{ fontWeight: "bold", marginBottom: 4, fontSize: 16 }}>TT Hiến Máu Nhân Đạo</div>
+                <div style={{ fontWeight: "bold", marginBottom: 4, fontSize: 16 }}>TT Hiến Máu Nhân</div>
                 <div style={{ color: "#ffd6e0", marginBottom: 2, fontSize: 15 }}>📍 466 Nguyễn Thị Minh Khai, Phường 2, Quận 3, Thành phố Hồ Chí Minh</div>
                 <div style={{ color: "#ffd6e0", marginBottom: 2, fontSize: 15 }}>📍 106 Thiên Phước, Phường 9, Tân Bình, Thành phố Hồ Chí Minh</div>
                 <div style={{ color: "#ff6666", marginBottom: 2, fontSize: 15 }}>📞 Liên hệ giờ hành chính</div>
